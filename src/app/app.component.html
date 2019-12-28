@@ -1,0 +1,6 @@
+<div class="spinner-position">
+    <mat-spinner *ngIf="commonService.showSpinner$ | async" [mode]="'indeterminate'" [value]="'50'" [diameter]="'70'"></mat-spinner>
+</div>
+
+
+<router-outlet></router-outlet>

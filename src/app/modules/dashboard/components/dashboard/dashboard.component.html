@@ -1,0 +1,105 @@
+<div>
+    <div class="profile-div">
+        <div class="profile-button">
+            <button class="primary-btn" (click)="toggleProfile()">Profile</button>
+        </div>
+        <div class="profile-tab" *ngIf="isProfileVisible">
+            <div class="profile-image">
+                <img [src]="imgURL" class="image" alt="User Image" height="100" width="100">
+            </div>
+            
+            <div class="profile-details" [formGroup]="profileForm">
+                <div class="profile-detail-tab">
+                    {{isProfileEditing ? '' : profileForm.value.name}}
+                    <input placeholder="Enter Name" formControlName="name" *ngIf="isProfileEditing">
+                </div>
+                <div class="profile-detail-tab">
+                    {{isProfileEditing ? '' : profileForm.value.email}}
+                    <input placeholder="Enter Email" type="email" formControlName="email" *ngIf="isProfileEditing">
+                </div>
+                <div class="profile-detail-tab">
+                    {{isProfileEditing ? '' : profileForm.value.phoneNo}}
+                    <input placeholder="Enter Phone Number" type="number" formControlName="phoneNo" *ngIf="isProfileEditing">
+                   
+                </div>
+                <div class="form-date-block" *ngIf="!isProfileEditing">
+                    <button class="primary-btn" (click)="toggleImageEdit()" *ngIf="!imageEditing">Edit Image</button>
+                    <input #file type="file" accept='image/*' (change)="preview(file.files)" *ngIf="imageEditing"/>
+                    <button (click)="toggleImageEdit()" class="primary-btn" *ngIf="imageEditing">Cancel</button>
+                </div>
+                <div class="form-date-block" *ngIf="!imageEditing"> 
+                    <button class="primary-btn" (click)="toggleProfileEdit()">{{isProfileEditing ? 'Cancel' : 'Edit Details'}}</button>
+                    <button class="primary-btn" (click)="saveProfileDetails()" *ngIf="isProfileEditing">Save</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <h4 class="table-title">Star War Movies Table</h4>
+    
+    <div class="panel-table mat-elevation-z8">
+        <div class="form-field">
+        
+            <div class="form-block" [formGroup]="tableForm">
+                <input class="ml-3" class="search-bar" matInput placeholder="Search Here" formControlName="filterInput" />
+            </div>
+            <form [formGroup]="tableForm" >
+                <div class="form-date-block">
+                    <div class="form-block">
+                        <mat-form-field>
+                            <input matInput placeholder="From Date" [matDatepicker]="fromDate" formControlName="fromDate"/>
+                            <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                            <mat-datepicker #fromDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-block">
+                        <mat-form-field>
+                            <input matInput placeholder="To Date" [matDatepicker]="toDate" formControlName="toDate"/>
+                            <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                            <mat-datepicker #toDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <button mat-button class="date-btn" (click)="applyDateFilter()">Submit</button>
+                </div>
+            </form>
+        </div>
+        <table mat-table [dataSource]="tableData">
+            <ng-container matColumnDef="episodeId">
+                <th mat-header-cell *matHeaderCellDef>Episode ID</th>
+                <td mat-cell *matCellDef="let element">{{element.episode_id}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef>Title</th>
+                <td mat-cell *matCellDef="let element">{{element.title}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="openingCrawl">
+                <th mat-header-cell *matHeaderCellDef>Opening Crawl</th>
+                <td mat-cell *matCellDef="let element">{{element.opening_crawl}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="director">
+                <th mat-header-cell *matHeaderCellDef>Director</th>
+                <td mat-cell *matCellDef="let element">{{element.director}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="producer">
+                <th mat-header-cell *matHeaderCellDef>Producer</th>
+                <td mat-cell *matCellDef="let element">{{element.producer}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="releaseDate">
+                <th mat-header-cell *matHeaderCellDef>Release Date</th>
+                <td mat-cell *matCellDef="let element">{{element.release_date | date : "mediumDate"}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[10, 20, 30, 50]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>
+

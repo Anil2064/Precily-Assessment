@@ -1,0 +1,35 @@
+.panel-table{
+    border: 1px solid #dedede;
+    // background-color: #ffffff !important;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.02); 
+    margin : 2em;
+    border-radius: 3px;
+}
+
+
+table {
+    width: 100% !important;
+}
+
+.mat-cell, .mat-header-cell{
+    text-align: center;
+    // background-color: #ffffff !important;
+    max-width: 50vw;
+    min-width: 10vw;
+    // text-overflow: ellipsis;
+    // overflow: hidden;
+    // white-space: nowrap;
+}
+
+.mat-row:hover td{
+    background: #ceceb9 !important;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.placeholder{
+    margin-left: 15px !important;
+}
